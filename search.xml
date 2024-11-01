@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>pinia的安装和使用</title>
+    <url>/2024/10/31/2024103101/</url>
+    <content><![CDATA[<h2 id="1-什么是-pinia"><a href="#1-什么是-pinia" class="headerlink" title="1.什么是 pinia?"></a>1.什么是 pinia?</h2><p>pinia是一个类似于vuex的状态管理工具</p>
+<h2 id="2-inia和vuex的区别"><a href="#2-inia和vuex的区别" class="headerlink" title="2.inia和vuex的区别"></a>2.inia和vuex的区别</h2><ul>
+<li>pinia 最初是为了探索 Vuex 的下一次迭代会是什么样子</li>
+<li>与 Vuex 相比，Pinia 提供了一个更简单的 API，具有更少的仪式，提供了 Composition-API 风格的 API；</li>
+<li>最重要的是，在与 TypeScript 一起使用时具有可靠的类型推断支持；</li>
+</ul>
+<h2 id="3-安装和使用"><a href="#3-安装和使用" class="headerlink" title="3.安装和使用"></a>3.安装和使用</h2><p>1.安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pinia</span><br><span class="line"><span class="comment"># 或者使用 npm</span></span><br><span class="line">npm install pinia</span><br></pre></td></tr></table></figure>
+<p>2.使用</p>
+<ul>
+<li>在根目录新建store文件，store中新建index.js文件<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// stores/counter.js</span><br><span class="line">import &#123; defineStore &#125; from <span class="string">&#x27;pinia&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const useCounterStore = defineStore(<span class="string">&#x27;counter&#x27;</span>, &#123;</span><br><span class="line">    state: () =&gt; &#123;</span><br><span class="line">        <span class="built_in">return</span> &#123; count: 0 &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters:&#123;</span><br><span class="line">        //获取参数</span><br><span class="line">        getCount:state=&gt;state.count</span><br><span class="line">    &#125;,</span><br><span class="line">    // 也可以这样定义</span><br><span class="line">    // state: () =&gt; (&#123; count: 0 &#125;)</span><br><span class="line">    actions: &#123;</span><br><span class="line">        <span class="function"><span class="title">increment</span></span>() &#123;</span><br><span class="line">            this.count++;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>在main.js中导入<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123;createPinia&#125; from <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line">const store = createPinia()</span><br><span class="line"><span class="built_in">let</span> app = createApp(App) </span><br><span class="line"></span><br><span class="line">app.use(store)</span><br></pre></td></tr></table></figure></li>
+<li>在具体模块中使用<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;about&quot;</span>&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123;counter.count&#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;button @click=<span class="string">&quot;count++&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;button&quot;</span>&gt;count+&lt;/button&gt;</span><br><span class="line">    &lt;button @click=<span class="string">&quot;add&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;button&quot;</span>&gt;count+1&lt;/button&gt;</span><br><span class="line">    &lt;!-- getters获取数据 --&gt;</span><br><span class="line">    &#123;&#123;counter.getCount&#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; useCounterStore &#125; from <span class="string">&#x27;@/store&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    const counter = useCounterStore();</span><br><span class="line">    const add=()=&gt;&#123;</span><br><span class="line">        counter.increment()</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>pipia的解构</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123;storeToRefs&#125; from <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line">const counter = useCounterStore();</span><br><span class="line">const &#123;count&#125; = storeToRefs(counter)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>pinia</category>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>pinia</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java配置图片访问映射</title>
+    <url>/2024/11/01/2024110101/</url>
+    <content><![CDATA[<p>建立配置文件，使用config注解，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ImgConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="comment">//@Value可以将配置文件的内容自动注入到属性内</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;savePath.profilePhoto&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String profilePhotoPath;   <span class="comment">//图标物理存储路径</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;savePath.profilePhotoMapper&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String profilePhotoMapperPath;   <span class="comment">//图标映射路径</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span>&#123;</span><br><span class="line">        registry.addResourceHandler(profilePhotoMapperPath+<span class="string">&quot;**&quot;</span>).addResourceLocations(<span class="string">&quot;file:&quot;</span>+profilePhotoPath);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：前面的profilePhotoMapperPath是映射的路径，后面的profilePhotoPath真实路径，这个地方是容易写错的地方</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">savePath:</span><br><span class="line">    profilePhoto: <span class="string">&quot;F:/gis2.0updata/gisimg/&quot;</span>  #图标存储路径</span><br><span class="line">    profilePhotoMapper: <span class="string">&quot;/img/&quot;</span>  #图标的映射路径</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mobx的介绍和使用</title>
+    <url>/2024/10/31/2024103102/</url>
+    <content><![CDATA[<h2 id="什么是mobox"><a href="#什么是mobox" class="headerlink" title="什么是mobox"></a>什么是mobox</h2><p>是一个用来管理状态的库，如果被观测组件发生改变，会自动渲染有关页面,告别setState;<br>mbox编程的3个重点：<br>    1.observer观测器：带有观测器的react组件或者属性被mobx实时观测<br>    2.observable可观测对象：由mobx建立的可观测对象<br>    3.action更新事件：标识观测对象的改变事件</p>
+<h2 id="mobox的安装和使用"><a href="#mobox的安装和使用" class="headerlink" title="mobox的安装和使用"></a>mobox的安装和使用</h2><p>1.安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install mobx,mobx-react-lite --save</span><br><span class="line">根目录新建store文件并在store中新建index.js和test.Store.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// test.Store.js module</span><br><span class="line">    import &#123; makeAutoObservable &#125; from <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line">    </span><br><span class="line">    class TestStore &#123;</span><br><span class="line">    </span><br><span class="line">      userInfo = &#123;&#125;</span><br><span class="line">      <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        // 响应式</span><br><span class="line">        makeAutoObservable(this)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="title">setUser</span></span>()&#123;</span><br><span class="line">          this.userInfo =&#123;name:<span class="string">&quot;张三&quot;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">      get <span class="function"><span class="title">getUser</span></span>()&#123;</span><br><span class="line">          <span class="built_in">return</span> this.userInfo </span><br><span class="line">      &#125;</span><br><span class="line">     </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">export</span> default TestStore </span><br><span class="line">//index.js</span><br><span class="line">    // 把所有的模块做统一处理</span><br><span class="line">    // 导出一个统一的方法 useStore</span><br><span class="line">    import React from <span class="string">&quot;react&quot;</span></span><br><span class="line">    import TestStore from <span class="string">&quot;./test.Store&quot;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    import &#123; configure &#125; from <span class="string">&quot;mobx&quot;</span></span><br><span class="line">    configure(&#123;</span><br><span class="line">      enforceActions: <span class="string">&quot;never&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    class RootStore &#123;</span><br><span class="line">      <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.testStore = new TestStore ()</span><br><span class="line">    </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">//下面的代码都是固定的，换一个平台代码也不会</span><br><span class="line"></span><br><span class="line">// 实例化根</span><br><span class="line">// 导出useStore context</span><br><span class="line">const rootStore = new RootStore()</span><br><span class="line">const context = React.createContext(rootStore)</span><br><span class="line"></span><br><span class="line">const useStore = () =&gt; React.useContext(context)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> &#123; useStore &#125;</span><br></pre></td></tr></table></figure>
+<p>2.使用</p>
+<p>在使用的模块导出store</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; useStore  &#125; from <span class="string">&#x27;@/store&#x27;</span></span><br><span class="line">    import &#123; observer &#125; from <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line">    const App=()=&gt;&#123;</span><br><span class="line">        const &#123;  testStore &#125; = useStore()</span><br><span class="line">        //使用<span class="built_in">test</span>里面的方法</span><br><span class="line">        loginStore.getUser()</span><br><span class="line">    &#125;</span><br><span class="line">    //重点：需要使用observer包装起来才可以</span><br><span class="line">    <span class="built_in">export</span> default observer(App)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>mobx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dockerfile的说明</title>
+    <url>/2024/11/01/2024110102/</url>
+    <content><![CDATA[<p>docker用的好，dockerfile配置少不了，配置好dockerfile才能打包一个正确的镜像以供使用。</p>
+<p>#第一行配置镜像的依赖，比如这个镜像是使用go语言开发，选择开发版本，as build是一个文件名称，后面有用到</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">FROM golang:1.18.3 as build</span><br><span class="line"></span><br><span class="line"><span class="comment">#WORKDIR关键字 设置工作路径</span></span><br><span class="line">WORKDIR /build</span><br><span class="line"></span><br><span class="line"><span class="comment">#把项目所有文件复制到镜像的根目录文件夹中</span></span><br><span class="line">ADD . ./</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Go语言的环境变量，打开Go Module模式。设置包下载源，有利于快速下载包</span></span><br><span class="line">ENV GO111MODULE=on \</span><br><span class="line">GOPROXY=https://goproxy.cn</span><br><span class="line"></span><br><span class="line"><span class="comment">#下载go.mod里面的包</span></span><br><span class="line">RUN go mod download</span><br><span class="line"></span><br><span class="line"><span class="comment">#编译</span></span><br><span class="line">RUN go build -o gin_docker .</span><br><span class="line"></span><br><span class="line"><span class="comment">#打开端口</span></span><br><span class="line">EXPOSE 8000</span><br><span class="line"></span><br><span class="line"><span class="comment">#运行项目</span></span><br><span class="line">ENTRYPOINT  [<span class="string">&quot;./gin_docker&quot;</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>服务端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue打包后出现文件过大加载速度过慢问题解决方案</title>
+    <url>/2024/11/01/2024110103/</url>
+    <content><![CDATA[<p>我们在处理网站加载速度过慢问题是，首先想到的是cdn加速，还有一种解决方案，这种方案作用于nginx服务。</p>
+<p>下面是我做网站配置的解决方案：</p>
+<h2 id="新建一个vue项目，打包之后发现会有一个文件特别大，特别是引入的插件越多，这个文件就越大，查阅资料发现这是我们的node-modules打包之后生成的文件。"><a href="#新建一个vue项目，打包之后发现会有一个文件特别大，特别是引入的插件越多，这个文件就越大，查阅资料发现这是我们的node-modules打包之后生成的文件。" class="headerlink" title="新建一个vue项目，打包之后发现会有一个文件特别大，特别是引入的插件越多，这个文件就越大，查阅资料发现这是我们的node_modules打包之后生成的文件。"></a>新建一个vue项目，打包之后发现会有一个文件特别大，特别是引入的插件越多，这个文件就越大，查阅资料发现这是我们的node_modules打包之后生成的文件。</h2><h2 id="webpack配置可以将文件打包为-gz文件，传入nginx服务器之后，开启相关配置，他就会自动解压，这是这个文件就会成倍的减小。"><a href="#webpack配置可以将文件打包为-gz文件，传入nginx服务器之后，开启相关配置，他就会自动解压，这是这个文件就会成倍的减小。" class="headerlink" title="webpack配置可以将文件打包为.gz文件，传入nginx服务器之后，开启相关配置，他就会自动解压，这是这个文件就会成倍的减小。"></a>webpack配置可以将文件打包为.gz文件，传入nginx服务器之后，开启相关配置，他就会自动解压，这是这个文件就会成倍的减小。</h2><p>webpack的配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//js html css配置</span></span><br><span class="line"><span class="attr">configureWebpack</span>: <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* gzip压缩 */</span></span><br><span class="line">  <span class="keyword">const</span> productionGzipExtensions = [<span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;css&#x27;</span>]</span><br><span class="line">  config.<span class="property">plugins</span>.<span class="title function_">push</span>(</span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">CompressionWebpackPlugin</span>(&#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;[path][base].gz&#x27;</span>,</span><br><span class="line">        <span class="attr">algorithm</span>: <span class="string">&#x27;gzip&#x27;</span>,</span><br><span class="line">        <span class="attr">test</span>: <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;\\.(&#x27;</span> + productionGzipExtensions.<span class="title function_">join</span>(<span class="string">&#x27;|&#x27;</span>) + <span class="string">&#x27;)$&#x27;</span>),</span><br><span class="line">        <span class="attr">threshold</span>: <span class="number">10240</span>, <span class="comment">// 只有大小大于该值的资源会被处理 10240</span></span><br><span class="line">        <span class="attr">minRatio</span>: <span class="number">0.8</span>, <span class="comment">// 只有压缩率小于这个值的资源才会被处理</span></span><br><span class="line">        <span class="attr">deleteOriginalAssets</span>: <span class="literal">false</span>, <span class="comment">// 删除原文件</span></span><br><span class="line">      &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要导入的插件是</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i compression-webpack-plugin</span><br></pre></td></tr></table></figure>
+<p>图片压缩的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">chainWebpack</span>: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">         <span class="comment">/* 压缩图片 */</span></span><br><span class="line">        config.<span class="property">module</span></span><br><span class="line">            .<span class="title function_">rule</span>(<span class="string">&#x27;images&#x27;</span>)</span><br><span class="line">            .<span class="title function_">use</span>(<span class="string">&#x27;image-webpack-loader&#x27;</span>)</span><br><span class="line">            .<span class="title function_">loader</span>(<span class="string">&#x27;image-webpack-loader&#x27;</span>)</span><br><span class="line">            .<span class="title function_">options</span>(&#123; <span class="attr">bypassOnDebug</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">            .<span class="title function_">end</span>()</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>需要导入的插件如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install image-webpack-loader --save-dev</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浏览器跨域消息传递</title>
+    <url>/2024/11/01/2024110104/</url>
+    <content><![CDATA[<h2 id="父页面给子页面传值"><a href="#父页面给子页面传值" class="headerlink" title="父页面给子页面传值"></a>父页面给子页面传值</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> iframe = <span class="variable language_">document</span>.<span class="title function_">getElementId</span>(<span class="string">&#x27;iframe&#x27;</span>)<span class="comment">//iframe容器</span></span><br><span class="line">iframe.<span class="property">contentWindow</span>.<span class="title function_">postMessage</span>(&#123;<span class="attr">msg</span>: <span class="string">&#x27;来自父页面的消息&#x27;</span>&#125;, <span class="string">&quot;*&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="子页面接收消息"><a href="#子页面接收消息" class="headerlink" title="子页面接收消息"></a>子页面接收消息</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="variable language_">window</span>.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">event</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">data</span>.<span class="property">msg</span>) <span class="comment">// 来自父页面的消息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="子页面给父页面传递消息"><a href="#子页面给父页面传递消息" class="headerlink" title="子页面给父页面传递消息"></a>子页面给父页面传递消息</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">parent</span>.<span class="title function_">postMessage</span>(&#123;<span class="attr">msg</span>: <span class="string">&#x27;来自子页面值&#x27;</span>&#125;, <span class="string">&quot;*&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="父页面接收消息"><a href="#父页面接收消息" class="headerlink" title="父页面接收消息"></a>父页面接收消息</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onmessage</span> = <span class="keyword">function</span>(<span class="params">event</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">data</span>.<span class="property">msg</span>) <span class="comment">// 来自子页面值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在npm中发布自己开发的插件</title>
+    <url>/2024/11/01/2024110105/</url>
+    <content><![CDATA[<h2 id="注册npm账号，打开-https-www-npmjs-com-signup-进行注册"><a href="#注册npm账号，打开-https-www-npmjs-com-signup-进行注册" class="headerlink" title="注册npm账号，打开 https://www.npmjs.com/signup 进行注册"></a>注册npm账号，打开 <a href="https://www.npmjs.com/signup">https://www.npmjs.com/signup</a> 进行注册</h2><h2 id="初始化需要上传的包，新建一个文件夹，运行"><a href="#初始化需要上传的包，新建一个文件夹，运行" class="headerlink" title="初始化需要上传的包，新建一个文件夹，运行"></a>初始化需要上传的包，新建一个文件夹，运行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>根据提示会在文件夹中生成一个package.json文件，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   </span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xyj-3d&quot;</span>, <span class="comment">#包名</span></span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.3&quot;</span>,#版本号</span><br><span class="line">  <span class="string">&quot;description&quot;</span>: <span class="string">&quot;cesium-plus&quot;</span>,#信息 </span><br><span class="line">  <span class="string">&quot;main&quot;</span>: <span class="string">&quot;xyj.min.js&quot;</span>,#入口文件</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;author&quot;</span>: <span class="string">&quot;xyj&quot;</span>,#作者</span><br><span class="line">  <span class="string">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>确保npm是npm源，不是其他源，安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g nrm</span><br><span class="line"></span><br><span class="line">//查看本地所有镜像，带 * 的是当前使用的镜像</span><br><span class="line">nrm <span class="built_in">ls</span></span><br><span class="line">//添加一个自己的源</span><br><span class="line">nrm add xxx http://xxxnpm.cn/</span><br><span class="line"></span><br><span class="line">//使用指定源</span><br><span class="line">nrm use xxx</span><br><span class="line">//删除指定源</span><br><span class="line">nrm del xxx</span><br><span class="line">使用</span><br><span class="line"></span><br><span class="line">npm login</span><br><span class="line">输入用户名和密码登录，注意，每次登录都需要一个动态验证码。登录成功后执行</span><br><span class="line"></span><br><span class="line">npm publish </span><br><span class="line">即可发布成功，现在可以去npm上搜索你的插件了。使用的时候和其他插件一样。</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Node</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次rollup打包过程</title>
+    <url>/2024/11/01/2024110106/</url>
+    <content><![CDATA[<h2 id="安装roolup"><a href="#安装roolup" class="headerlink" title="安装roolup"></a>安装roolup</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yarn add -D rollup</span><br></pre></td></tr></table></figure>
+<h2 id="安装其他插件"><a href="#安装其他插件" class="headerlink" title="安装其他插件"></a>安装其他插件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yarn add -D @rollup/plugin-commonjs rollup-plugin-terser rollup-plugin-typescript2</span><br></pre></td></tr></table></figure>
+<p>插件说明：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">@rollup/plugin-commonjs：让rollup知道项目用了那些依赖，打包的时候不要忘了</span><br><span class="line">rollup-plugin-terser：压缩代码</span><br><span class="line">rollup-plugin-typescript2：让rollup可以看懂<span class="variable constant_">TS</span>代码</span><br></pre></td></tr></table></figure>
+<h2 id="rollup配置文件"><a href="#rollup配置文件" class="headerlink" title="rollup配置文件"></a>rollup配置文件</h2><p>新建rollup.config.js配置文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入依赖</span></span><br><span class="line">  <span class="keyword">const</span> &#123; terser &#125; = <span class="built_in">require</span>(<span class="string">&#x27;rollup-plugin-terser&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> commonjs = <span class="built_in">require</span>(<span class="string">&#x27;@rollup/plugin-commonjs&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> typescript = <span class="built_in">require</span>(<span class="string">&#x27;rollup-plugin-typescript2&#x27;</span>)</span><br><span class="line">  ​</span><br><span class="line">  <span class="comment">// tsconfig.json合并选项</span></span><br><span class="line">  <span class="comment">// 一般来说默认使用项目的tsconfig.json，如果有个别需要修改的如下，可以在此修改</span></span><br><span class="line">  <span class="keyword">const</span> override = &#123; <span class="attr">compilerOptions</span>: &#123; <span class="attr">module</span>: <span class="string">&#x27;ESNext&#x27;</span> &#125; &#125;</span><br><span class="line">  ​</span><br><span class="line">  <span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// 项目入口</span></span><br><span class="line">    <span class="attr">input</span>: <span class="string">&#x27;src/app.ts&#x27;</span>,</span><br><span class="line">  ​</span><br><span class="line">    <span class="comment">// 打包后的出口和设置</span></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">      <span class="attr">file</span>: <span class="string">&#x27;dist/app.min.js&#x27;</span>,</span><br><span class="line">      <span class="attr">format</span>: <span class="string">&#x27;cjs&#x27;</span>,</span><br><span class="line">      <span class="attr">sourcemap</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">exports</span>: <span class="string">&#x27;default&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  ​</span><br><span class="line">    <span class="comment">// 使用的插件</span></span><br><span class="line">    <span class="comment">// 注意，这里的插件使用是有顺序的，先把ts编译为js，然后查找依赖，最后压缩</span></span><br><span class="line">    <span class="attr">plugins</span>: [<span class="title function_">typescript</span>(&#123; <span class="attr">tsconfig</span>: <span class="string">&#x27;./tsconfig.json&#x27;</span>, <span class="attr">tsconfigOverride</span>: override &#125;), <span class="title function_">commonjs</span>(), <span class="title function_">terser</span>()],</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="package-json配置"><a href="#package-json配置" class="headerlink" title="package.json配置"></a>package.json配置</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;rollup:build&quot;</span>: <span class="string">&quot;rollup -c&quot;</span>  //-c表示按照配置文件运行</span><br></pre></td></tr></table></figure>
+<h2 id="运行命令"><a href="#运行命令" class="headerlink" title="运行命令"></a>运行命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn rollup:build</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>rollup</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>css动画的属性及基础用法</title>
+    <url>/2024/11/01/2024110107/</url>
+    <content><![CDATA[<p>css3出现以后，css的动画就使用的特别广泛，下面是我在使用css3动画的一些理解。</p>
+<h2 id="css3动画的基础用法"><a href="#css3动画的基础用法" class="headerlink" title="css3动画的基础用法"></a>css3动画的基础用法</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> 动画名称&#123;</span><br><span class="line">  动画的操作属性</span><br><span class="line">&#125;</span><br><span class="line">使用动画的标签&#123;</span><br><span class="line">  <span class="attribute">animation-name</span>:动画名称;<span class="comment">/*需要执行的动画的名字*/</span></span><br><span class="line">  <span class="attribute">animation-duration</span>: <span class="number">3s</span>;<span class="comment">/*所需要的时间*/</span></span><br><span class="line">  <span class="attribute">animation-iteration-count</span>: infinite;<span class="comment">/* 执行次数*/</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="css3动画的基础属性"><a href="#css3动画的基础属性" class="headerlink" title="css3动画的基础属性"></a>css3动画的基础属性</h2><p>下面是对具体值的解释：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>属性值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>曲线速率</td>
+<td>linear</td>
+<td>匀速线性运动</td>
+</tr>
+<tr>
+<td>曲线速率</td>
+<td>steps(数字)</td>
+<td>逐帧动画(一般配合精灵图使用）</td>
+</tr>
+<tr>
+<td>曲线速率</td>
+<td>ease-in-out</td>
+<td>慢速开始和结束</td>
+</tr>
+<tr>
+<td>动画次数</td>
+<td>number</td>
+<td>定义运动的次数，默认是一次</td>
+</tr>
+<tr>
+<td>动画次数</td>
+<td>infinite</td>
+<td>无限运动</td>
+</tr>
+<tr>
+<td>动画方向</td>
+<td>alternate</td>
+<td>逆向运动(运动次数需要大于1才能看出效果)</td>
+</tr>
+<tr>
+<td>动画终点</td>
+<td>none(默认值)</td>
+<td>默认终点是原点</td>
+</tr>
+<tr>
+<td>动画终点</td>
+<td>forwards</td>
+<td>在运动结束的之后，停到结束位</td>
+</tr>
+</tbody></table>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">## 示例演示：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>动画示例演示<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>: <span class="number">#550000</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">margin</span>: <span class="number">100px</span> auto;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">color</span>: white;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">padding</span>: <span class="number">10px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">animation</span>: ani <span class="number">3s</span> <span class="number">2</span> linear forwards alternate;</span></span><br><span class="line"><span class="language-css">      </span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">animation-play-state</span>: paused;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="keyword">@keyframes</span> ani &#123;</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">form</span> &#123;&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">to</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">transform</span>: <span class="built_in">translateY</span>(<span class="number">400px</span>);</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>动画示例演示<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker run的命令讲解</title>
+    <url>/2024/11/01/2024110108/</url>
+    <content><![CDATA[<p>当我们运行一个docker run 的时候，里面有许多命令，如果需要加卷来映射本地路径需要怎么做，下面图解一条相对完整的docker命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name webl -p 80:80 -v /usr/share/nginx/html nginx</span><br></pre></td></tr></table></figure>
+<p>&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html下产生新的目录html 运行的端口为80</p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>服务端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>反向ssh</title>
+    <url>/2024/11/01/2024110109/</url>
+    <content><![CDATA[<h2 id="什么是ssh？"><a href="#什么是ssh？" class="headerlink" title="什么是ssh？"></a>什么是ssh？</h2><p>SSH 为 Secure Shell 的缩写，SSH 为建立在应用层基础上的安全协议。SSH 是较可靠，专为远程登录会话和其他网络服务提供安全性的协议。</p>
+<h2 id="什么是ssh反向连接？"><a href="#什么是ssh反向连接？" class="headerlink" title="什么是ssh反向连接？"></a>什么是ssh反向连接？</h2><p>反向连接是指主机A（受控端）主动连接主机B（控制端），在主机A和主机B之间建立一个远程连接，通过这个连接主机B可以主动的向主机A发送一些请求。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol>
+<li><p>平时我们登录远程服务器，一般使用ssh登录远程服务器</p>
+</li>
+<li><p>现在我们想通过远程服务器反向操作登录本地PC，但由于一般本地PC没有公网IP，导致远程服务器使用正常ssh命令无法登录PC，这个时候就需要使用ssh反向连接功能。</p>
+</li>
+</ol>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
+<li><p>使用ps -ef | grep sshd 确定主机A，和主机B都运行了sshd。如果没有运行sshd，则需要执行sudo apt-get install openssh-server 安装openssh-server</p>
+</li>
+<li><p>主机A执行命令与服务器建立连接：ssh -CqTfnN -R :11111:localhost:22 <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#49;&#56;&#x32;&#46;&#50;&#x35;&#x34;&#46;&#x31;&#51;&#x35;&#46;&#50;&#51;&#57;">&#114;&#x6f;&#111;&#116;&#64;&#49;&#56;&#x32;&#46;&#50;&#x35;&#x34;&#46;&#x31;&#51;&#x35;&#46;&#50;&#51;&#57;</a>，其中182.254.135.239是服务器的地址，然后输入主机B的密码。</p>
+</li>
+<li><p>主机B（服务器）执行命令远程登录主机A：ssh test@localhost -p 11111,其中test为主机A的用户，然后输入主机A test主机的用户名 的密码，即可ssh登录到主机A。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>ssh</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何实现软路由功能</title>
+    <url>/2024/11/01/2024110110/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Script to set up network sharing with static IP</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define network interfaces and IP addresses</span></span><br><span class="line"></span><br><span class="line">LAN_INTERFACE=<span class="string">&quot;eth0&quot;</span></span><br><span class="line"></span><br><span class="line">WIFI_INTERFACE=<span class="string">&quot;wlan0&quot;</span></span><br><span class="line"></span><br><span class="line">LAN_IP=<span class="string">&quot;192.168.0.1&quot;</span></span><br><span class="line"></span><br><span class="line">DHCP_RANGE=<span class="string">&quot;192.168.0.10,192.168.0.50,12h&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable IP forwarding</span></span><br><span class="line"></span><br><span class="line">sysctl net.ipv4.ip_forward=1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up iptables rules</span></span><br><span class="line"></span><br><span class="line">iptables -A POSTROUTING -t nat -o <span class="variable">$WIFI_INTERFACE</span> -j MASQUERADE</span><br><span class="line"></span><br><span class="line">iptables -A FORWARD -i <span class="variable">$WIFI_INTERFACE</span> -o <span class="variable">$LAN_INTERFACE</span> -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables -A FORWARD -i <span class="variable">$LAN_INTERFACE</span> -o <span class="variable">$WIFI_INTERFACE</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start dnsmasq</span></span><br><span class="line"></span><br><span class="line">service dnsmasq start</span><br><span class="line"></span><br><span class="line">service dnsmasq restart</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Save iptables rules</span></span><br><span class="line"></span><br><span class="line">iptables-save | <span class="built_in">tee</span> /etc/iptables.rules</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure static IP for LAN interface</span></span><br><span class="line"></span><br><span class="line">ifconfig <span class="variable">$LAN_INTERFACE</span> <span class="variable">$LAN_IP</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;interface <span class="variable">$LAN_INTERFACE</span>&quot;</span> &gt;&gt; /etc/dnsmasq.conf</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;dhcp-range=<span class="variable">$LAN_IP</span>,<span class="variable">$DHCP_RANGE</span>&quot;</span> &gt;&gt; /etc/dnsmasq.conf</span><br></pre></td></tr></table></figure>
+<p>注意端口占用，需要kill</p>
+]]></content>
+      <categories>
+        <category>ssh</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx配置https访问</title>
+    <url>/2024/10/30/hello-world/</url>
+    <content><![CDATA[<p>https证书怎么获取，教程很多，就不在这里说了，主要记录一下如何开启nginx的https服务，以及配置http转发https.</p>
+<h2 id="第一步，打开nginx配置文件nginx-conf-打开https服务"><a href="#第一步，打开nginx配置文件nginx-conf-打开https服务" class="headerlink" title="第一步，打开nginx配置文件nginx.conf.打开https服务"></a>第一步，打开nginx配置文件nginx.conf.打开https服务</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#server &#123;</span></span><br><span class="line"><span class="comment">#    listen       443 ssl;</span></span><br><span class="line"><span class="comment">#    server_name  localhost;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#    ssl_certificate      cert.pem;</span></span><br><span class="line"><span class="comment">#    ssl_certificate_key  cert.key;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#    ssl_session_cache    shared:SSL:1m;</span></span><br><span class="line"><span class="comment">#    ssl_session_timeout  5m;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#    ssl_ciphers  HIGH:!aNULL:!MD5;</span></span><br><span class="line"><span class="comment">#    ssl_prefer_server_ciphers  on;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#    location / &#123;</span></span><br><span class="line"><span class="comment">#        root   html;</span></span><br><span class="line"><span class="comment">#        index  index.html index.htm;</span></span><br><span class="line"><span class="comment">#    &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="第二步，server（80下的server）加入以下配置"><a href="#第二步，server（80下的server）加入以下配置" class="headerlink" title="第二步，server（80下的server）加入以下配置"></a>第二步，server（80下的server）加入以下配置</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server_name  _;</span><br><span class="line"><span class="built_in">return</span> 301 https://$host<span class="variable">$request_uri</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="第三步-在443下的的server的location下加入如下配置"><a href="#第三步-在443下的的server的location下加入如下配置" class="headerlink" title="第三步,在443下的的server的location下加入如下配置"></a>第三步,在443下的的server的location下加入如下配置</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">proxy_pass   你的域名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="注意，你的后台服务记得在443下面配置映射，如下："><a href="#注意，你的后台服务记得在443下面配置映射，如下：" class="headerlink" title="注意，你的后台服务记得在443下面配置映射，如下："></a>注意，你的后台服务记得在443下面配置映射，如下：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /api/ &#123;</span><br><span class="line"></span><br><span class="line">proxy_pass 你的后端访问路径;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后重启nginx就可以使用https访问了。</p>
+]]></content>
+      <categories>
+        <category>nginx</category>
+        <category>https</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+</search>
