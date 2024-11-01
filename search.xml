@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>mobx的介绍和使用</title>
+    <url>/2024/10/31/2024103102/</url>
+    <content><![CDATA[<h2 id="什么是mobox"><a href="#什么是mobox" class="headerlink" title="什么是mobox"></a>什么是mobox</h2><p>是一个用来管理状态的库，如果被观测组件发生改变，会自动渲染有关页面,告别setState;<br>mbox编程的3个重点：<br>    1.observer观测器：带有观测器的react组件或者属性被mobx实时观测<br>    2.observable可观测对象：由mobx建立的可观测对象<br>    3.action更新事件：标识观测对象的改变事件</p>
+<h2 id="mobox的安装和使用"><a href="#mobox的安装和使用" class="headerlink" title="mobox的安装和使用"></a>mobox的安装和使用</h2><p>1.安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install mobx,mobx-react-lite --save</span><br><span class="line">根目录新建store文件并在store中新建index.js和test.Store.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// test.Store.js module</span><br><span class="line">    import &#123; makeAutoObservable &#125; from <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line">    </span><br><span class="line">    class TestStore &#123;</span><br><span class="line">    </span><br><span class="line">      userInfo = &#123;&#125;</span><br><span class="line">      <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        // 响应式</span><br><span class="line">        makeAutoObservable(this)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="title">setUser</span></span>()&#123;</span><br><span class="line">          this.userInfo =&#123;name:<span class="string">&quot;张三&quot;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">      get <span class="function"><span class="title">getUser</span></span>()&#123;</span><br><span class="line">          <span class="built_in">return</span> this.userInfo </span><br><span class="line">      &#125;</span><br><span class="line">     </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">export</span> default TestStore </span><br><span class="line">//index.js</span><br><span class="line">    // 把所有的模块做统一处理</span><br><span class="line">    // 导出一个统一的方法 useStore</span><br><span class="line">    import React from <span class="string">&quot;react&quot;</span></span><br><span class="line">    import TestStore from <span class="string">&quot;./test.Store&quot;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    import &#123; configure &#125; from <span class="string">&quot;mobx&quot;</span></span><br><span class="line">    configure(&#123;</span><br><span class="line">      enforceActions: <span class="string">&quot;never&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    class RootStore &#123;</span><br><span class="line">      <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.testStore = new TestStore ()</span><br><span class="line">    </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">//下面的代码都是固定的，换一个平台代码也不会</span><br><span class="line"></span><br><span class="line">// 实例化根</span><br><span class="line">// 导出useStore context</span><br><span class="line">const rootStore = new RootStore()</span><br><span class="line">const context = React.createContext(rootStore)</span><br><span class="line"></span><br><span class="line">const useStore = () =&gt; React.useContext(context)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> &#123; useStore &#125;</span><br></pre></td></tr></table></figure>
+<p>2.使用</p>
+<p>在使用的模块导出store</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; useStore  &#125; from <span class="string">&#x27;@/store&#x27;</span></span><br><span class="line">    import &#123; observer &#125; from <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line">    const App=()=&gt;&#123;</span><br><span class="line">        const &#123;  testStore &#125; = useStore()</span><br><span class="line">        //使用<span class="built_in">test</span>里面的方法</span><br><span class="line">        loginStore.getUser()</span><br><span class="line">    &#125;</span><br><span class="line">    //重点：需要使用observer包装起来才可以</span><br><span class="line">    <span class="built_in">export</span> default observer(App)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>mobx</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pinia的安装和使用</title>
     <url>/2024/10/31/2024103101/</url>
     <content><![CDATA[<h2 id="1-什么是-pinia"><a href="#1-什么是-pinia" class="headerlink" title="1.什么是 pinia?"></a>1.什么是 pinia?</h2><p>pinia是一个类似于vuex的状态管理工具</p>
@@ -44,25 +63,6 @@
       <tags>
         <tag>java</tag>
         <tag>后端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mobx的介绍和使用</title>
-    <url>/2024/10/31/2024103102/</url>
-    <content><![CDATA[<h2 id="什么是mobox"><a href="#什么是mobox" class="headerlink" title="什么是mobox"></a>什么是mobox</h2><p>是一个用来管理状态的库，如果被观测组件发生改变，会自动渲染有关页面,告别setState;<br>mbox编程的3个重点：<br>    1.observer观测器：带有观测器的react组件或者属性被mobx实时观测<br>    2.observable可观测对象：由mobx建立的可观测对象<br>    3.action更新事件：标识观测对象的改变事件</p>
-<h2 id="mobox的安装和使用"><a href="#mobox的安装和使用" class="headerlink" title="mobox的安装和使用"></a>mobox的安装和使用</h2><p>1.安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install mobx,mobx-react-lite --save</span><br><span class="line">根目录新建store文件并在store中新建index.js和test.Store.js</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">// test.Store.js module</span><br><span class="line">    import &#123; makeAutoObservable &#125; from <span class="string">&#x27;mobx&#x27;</span></span><br><span class="line">    </span><br><span class="line">    class TestStore &#123;</span><br><span class="line">    </span><br><span class="line">      userInfo = &#123;&#125;</span><br><span class="line">      <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        // 响应式</span><br><span class="line">        makeAutoObservable(this)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="title">setUser</span></span>()&#123;</span><br><span class="line">          this.userInfo =&#123;name:<span class="string">&quot;张三&quot;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">      get <span class="function"><span class="title">getUser</span></span>()&#123;</span><br><span class="line">          <span class="built_in">return</span> this.userInfo </span><br><span class="line">      &#125;</span><br><span class="line">     </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">export</span> default TestStore </span><br><span class="line">//index.js</span><br><span class="line">    // 把所有的模块做统一处理</span><br><span class="line">    // 导出一个统一的方法 useStore</span><br><span class="line">    import React from <span class="string">&quot;react&quot;</span></span><br><span class="line">    import TestStore from <span class="string">&quot;./test.Store&quot;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    import &#123; configure &#125; from <span class="string">&quot;mobx&quot;</span></span><br><span class="line">    configure(&#123;</span><br><span class="line">      enforceActions: <span class="string">&quot;never&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    class RootStore &#123;</span><br><span class="line">      <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.testStore = new TestStore ()</span><br><span class="line">    </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">//下面的代码都是固定的，换一个平台代码也不会</span><br><span class="line"></span><br><span class="line">// 实例化根</span><br><span class="line">// 导出useStore context</span><br><span class="line">const rootStore = new RootStore()</span><br><span class="line">const context = React.createContext(rootStore)</span><br><span class="line"></span><br><span class="line">const useStore = () =&gt; React.useContext(context)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> &#123; useStore &#125;</span><br></pre></td></tr></table></figure>
-<p>2.使用</p>
-<p>在使用的模块导出store</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import &#123; useStore  &#125; from <span class="string">&#x27;@/store&#x27;</span></span><br><span class="line">    import &#123; observer &#125; from <span class="string">&#x27;mobx-react-lite&#x27;</span></span><br><span class="line">    const App=()=&gt;&#123;</span><br><span class="line">        const &#123;  testStore &#125; = useStore()</span><br><span class="line">        //使用<span class="built_in">test</span>里面的方法</span><br><span class="line">        loginStore.getUser()</span><br><span class="line">    &#125;</span><br><span class="line">    //重点：需要使用observer包装起来才可以</span><br><span class="line">    <span class="built_in">export</span> default observer(App)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>vue</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>mobx</tag>
       </tags>
   </entry>
   <entry>
@@ -149,6 +149,33 @@
       </tags>
   </entry>
   <entry>
+    <title>反向ssh</title>
+    <url>/2024/11/01/2024110109/</url>
+    <content><![CDATA[<h2 id="什么是ssh？"><a href="#什么是ssh？" class="headerlink" title="什么是ssh？"></a>什么是ssh？</h2><p>SSH 为 Secure Shell 的缩写，SSH 为建立在应用层基础上的安全协议。SSH 是较可靠，专为远程登录会话和其他网络服务提供安全性的协议。</p>
+<h2 id="什么是ssh反向连接？"><a href="#什么是ssh反向连接？" class="headerlink" title="什么是ssh反向连接？"></a>什么是ssh反向连接？</h2><p>反向连接是指主机A（受控端）主动连接主机B（控制端），在主机A和主机B之间建立一个远程连接，通过这个连接主机B可以主动的向主机A发送一些请求。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol>
+<li><p>平时我们登录远程服务器，一般使用ssh登录远程服务器</p>
+</li>
+<li><p>现在我们想通过远程服务器反向操作登录本地PC，但由于一般本地PC没有公网IP，导致远程服务器使用正常ssh命令无法登录PC，这个时候就需要使用ssh反向连接功能。</p>
+</li>
+</ol>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
+<li><p>使用ps -ef | grep sshd 确定主机A，和主机B都运行了sshd。如果没有运行sshd，则需要执行sudo apt-get install openssh-server 安装openssh-server</p>
+</li>
+<li><p>主机A执行命令与服务器建立连接：ssh -CqTfnN -R :11111:localhost:22 <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#x31;&#56;&#50;&#46;&#50;&#53;&#x34;&#x2e;&#x31;&#x33;&#x35;&#x2e;&#x32;&#x33;&#57;">&#114;&#111;&#111;&#116;&#x40;&#x31;&#56;&#50;&#46;&#50;&#53;&#x34;&#x2e;&#x31;&#x33;&#x35;&#x2e;&#x32;&#x33;&#57;</a>，其中182.254.135.239是服务器的地址，然后输入主机B的密码。</p>
+</li>
+<li><p>主机B（服务器）执行命令远程登录主机A：ssh test@localhost -p 11111,其中test为主机A的用户，然后输入主机A test主机的用户名 的密码，即可ssh登录到主机A。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>ssh</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>css动画的属性及基础用法</title>
     <url>/2024/11/01/2024110107/</url>
     <content><![CDATA[<p>css3出现以后，css的动画就使用的特别广泛，下面是我在使用css3动画的一些理解。</p>
@@ -225,33 +252,6 @@
       </categories>
       <tags>
         <tag>服务端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>反向ssh</title>
-    <url>/2024/11/01/2024110109/</url>
-    <content><![CDATA[<h2 id="什么是ssh？"><a href="#什么是ssh？" class="headerlink" title="什么是ssh？"></a>什么是ssh？</h2><p>SSH 为 Secure Shell 的缩写，SSH 为建立在应用层基础上的安全协议。SSH 是较可靠，专为远程登录会话和其他网络服务提供安全性的协议。</p>
-<h2 id="什么是ssh反向连接？"><a href="#什么是ssh反向连接？" class="headerlink" title="什么是ssh反向连接？"></a>什么是ssh反向连接？</h2><p>反向连接是指主机A（受控端）主动连接主机B（控制端），在主机A和主机B之间建立一个远程连接，通过这个连接主机B可以主动的向主机A发送一些请求。</p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol>
-<li><p>平时我们登录远程服务器，一般使用ssh登录远程服务器</p>
-</li>
-<li><p>现在我们想通过远程服务器反向操作登录本地PC，但由于一般本地PC没有公网IP，导致远程服务器使用正常ssh命令无法登录PC，这个时候就需要使用ssh反向连接功能。</p>
-</li>
-</ol>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
-<li><p>使用ps -ef | grep sshd 确定主机A，和主机B都运行了sshd。如果没有运行sshd，则需要执行sudo apt-get install openssh-server 安装openssh-server</p>
-</li>
-<li><p>主机A执行命令与服务器建立连接：ssh -CqTfnN -R :11111:localhost:22 <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#49;&#56;&#x32;&#46;&#50;&#x35;&#x34;&#46;&#x31;&#51;&#x35;&#46;&#50;&#51;&#57;">&#114;&#x6f;&#111;&#116;&#64;&#49;&#56;&#x32;&#46;&#50;&#x35;&#x34;&#46;&#x31;&#51;&#x35;&#46;&#50;&#51;&#57;</a>，其中182.254.135.239是服务器的地址，然后输入主机B的密码。</p>
-</li>
-<li><p>主机B（服务器）执行命令远程登录主机A：ssh test@localhost -p 11111,其中test为主机A的用户，然后输入主机A test主机的用户名 的密码，即可ssh登录到主机A。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>ssh</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
